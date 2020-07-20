@@ -67,6 +67,10 @@
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
+                    @if(Auth::guard('admin')->user())
+                        <a href="{{ url('/admin/dashboard') }}">Admin Home</a>
+                    @endif
+
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
@@ -82,6 +86,7 @@
             <div class="content">
                 <div class="title m-b-md">
                     Laravel
+                    @if (Auth::check()){{ Auth::user()->name }}@endif
                 </div>
             </div>
         </div>
