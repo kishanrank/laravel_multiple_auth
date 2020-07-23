@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,64 +10,84 @@
 
     <style>
         /* these styles will animate bootstrap alerts. */
-        .alert{
+        .alert {
             z-index: 99;
             top: 60px;
-            right:18px;
-            min-width:30%;
+            right: 18px;
+            min-width: 30%;
             position: fixed;
             animation: slide 0.5s forwards;
         }
+
         @keyframes slide {
-            100% { top: 30px; }
+            100% {
+                top: 30px;
+            }
         }
+
         @media screen and (max-width: 668px) {
-            .alert{ /* center the alert on small screens */
+            .alert {
+                /* center the alert on small screens */
                 left: 10px;
-                right: 10px; 
+                right: 10px;
             }
         }
     </style>
 
     <title>{{config('app.name')}}</title>
 </head>
+
 <body>
 
     @include('inc.navbar')
     <main class="container-fluid">
-        @yield('content')
+        <div class="row">
+            @if(Auth::check())
+            <div class="col-lg-2">
+                <ul>
+                    <li><a href="/admin/dashboard">Home</a></li>
+                    <li><a href="{{ route('admin.admins.index')}}">Admins</a></li>
+                    <li><a href="{{ route('admin.roles.index')}}">Roles</a></li>
+                    <li><a href="{{ route('admin.products.index')}}">Products</a></li>
+                    <li><a href="#">Permission</a></li>
+                </ul>
+            </div>
+            @endif
+            @yield('content')
+        </div>
     </main>
 
     <script src="{{asset('js/app.js')}}"></script>
-    
+
     {{-- Success Alert --}}
     @if(session('status'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{session('status')}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{session('status')}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     @endif
 
     {{-- Error Alert --}}
     @if(session('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{session('error')}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{session('error')}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     @endif
 
     <script>
         //close the alert after 3 seconds.
-        $(document).ready(function(){
-	    setTimeout(function() {
-	        $(".alert").alert('close');
-	    }, 3000);
-    	});
+        $(document).ready(function() {
+            setTimeout(function() {
+                $(".alert").alert('close');
+            }, 3000);
+        });
     </script>
-    
+
 </body>
+
 </html>
