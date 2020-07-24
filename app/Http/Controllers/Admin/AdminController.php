@@ -13,10 +13,10 @@ class AdminController extends Controller
 {
     function __construct()
     {
-        // $this->middleware('permission:admin-list|admin-create|admin-edit|admin-delete', ['only' => ['index', 'store']]);
-        // $this->middleware('permission:admin-create', ['only' => ['create', 'store']]);
-        // $this->middleware('permission:admin-edit', ['only' => ['edit', 'update']]);
-        // $this->middleware('permission:admin-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:admin-list|admin-create|admin-edit|admin-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:admin-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:admin-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:admin-delete', ['only' => ['destroy']]);
     }
 
     public function index(Request $request)
@@ -40,8 +40,11 @@ class AdminController extends Controller
             'password' => 'required',
             'roles' => 'required'
         ]);
-        $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
+        $input = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ];
         $admin = Admin::create($input);
         $admin->assignRole($request->input('roles'));
         return redirect()->route('admin.admins.index')
