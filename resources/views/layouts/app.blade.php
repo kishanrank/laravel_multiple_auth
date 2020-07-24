@@ -42,7 +42,7 @@
     @include('inc.navbar')
     <main class="container-fluid">
         <div class="row">
-            @if(Auth::check())
+            @if(Auth::guard('admin')->check())
             <div class="col-lg-2">
                 <ul>
                     <li><a href="/admin/dashboard">Home</a></li>

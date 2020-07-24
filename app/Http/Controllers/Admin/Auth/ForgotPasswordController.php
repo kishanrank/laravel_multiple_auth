@@ -46,4 +46,6 @@ class ForgotPasswordController extends Controller
     public function guard(){
         return Auth::guard('admin');
     }
+
+    
 }

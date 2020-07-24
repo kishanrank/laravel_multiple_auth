@@ -23,7 +23,7 @@ class PermissionTableSeeder extends Seeder
             'product-delete'
         ];
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            Permission::create(['name' => $permission, 'guard_name' => 'admin']);
         }
     }
 }
