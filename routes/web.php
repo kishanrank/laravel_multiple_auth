@@ -36,5 +36,6 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function () {
         Route::resource('admins', 'AdminController');
         Route::resource('roles', 'RoleController');
         Route::resource('products', 'ProductController');
+        Route::resource('permissions', 'PermissionController');
     });
 });
