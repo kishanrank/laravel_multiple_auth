@@ -26,6 +26,7 @@ class ResetPasswordController extends Controller
         return view('admin.auth.passwords.reset',[
             'passwordUpdateRoute' => 'admin.password.update',
             'token' => $token,
+            'email' => $request->email
         ]);
     }
 

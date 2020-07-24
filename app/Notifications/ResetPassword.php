@@ -35,8 +35,8 @@ class ResetPassword extends Notification
     {
         return (new MailMessage)
             ->subject('Admin Password Notification')
-            ->line('You are receiving this email because we received a password reset request for your account.')
-            ->action('Reset Password', url('admin/password/reset', $this->token))
+            ->line('You are receiving this email because we received a password reset request for your admin account.')
+            ->action('Reset Password', url('admin/password/reset', $this->token) . '?email=' . urlencode($notifiable->getEmailForPasswordReset()))
             ->line('If you did not request a password reset, no further action is required.');
     }
 }
