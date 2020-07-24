@@ -37,7 +37,7 @@ class RoleController extends Controller
             'name' => 'required|unique:roles,name',
             'permission' => 'required',
         ]);
-        $role = Role::create(['name' => $request->input('name')]);
+        $role = Role::create(['name' => $request->name, 'guard_name' => 'admin']);
         $role->syncPermissions($request->input('permission'));
         return redirect()->route('admin.roles.index')
             ->with('success', 'Role created successfully');

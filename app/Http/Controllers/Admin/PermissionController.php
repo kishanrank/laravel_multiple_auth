@@ -26,7 +26,7 @@ class PermissionController extends Controller
         request()->validate([
             'name' => 'required',
         ]);
-        Permission::create($request->all());
+        Permission::create(['name' => $request->name, 'guard_name' => 'admin']);
         return redirect()->route('admin.permissions.index')
             ->with('success', 'Permission created successfully.');
     }
