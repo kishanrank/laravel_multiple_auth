@@ -18,7 +18,7 @@ class Admin extends Authenticatable implements MustVerifyEmail
     protected $table = 'admins';
 
     protected $fillable = [
-        'name', 'email', 'password', 'roles'
+        'name', 'email', 'password'
     ];
 
     protected $hidden = [

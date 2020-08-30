@@ -13,10 +13,10 @@ class AdminController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:admin-list|admin-create|admin-edit|admin-delete', ['only' => ['index', 'store']]);
-        $this->middleware('permission:admin-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:admin-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:admin-delete', ['only' => ['destroy']]);
+        // $this->middleware('permission:admin-list|admin-create|admin-edit|admin-delete', ['only' => ['index', 'store']]);
+        // $this->middleware('permission:admin-create', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:admin-edit', ['only' => ['edit', 'update']]);
+        // $this->middleware('permission:admin-delete', ['only' => ['destroy']]);
     }
 
     public function index(Request $request)
@@ -36,7 +36,7 @@ class AdminController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|email|unique:admins,email',
+            'email' => 'required|email|unique:users,email|unique:admins,email',
             'password' => 'required',
             'roles' => 'required'
         ]);
@@ -69,7 +69,7 @@ class AdminController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $id,
+            'email' => 'required|email|unique:users,email|unique:admins,email,' . $id,
             'roles' => 'required'
         ]);
         $input = $request->all();

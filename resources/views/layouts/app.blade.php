@@ -43,6 +43,7 @@
     <main class="container-fluid">
         <div class="row">
             @if(Auth::guard('admin')->check())
+            @if(request()->is('admin/*'))
             <div class="col-lg-2">
                 <ul>
                     <li><a href="/admin/dashboard">Home</a></li>
@@ -52,6 +53,7 @@
                     <li><a href="{{ route('admin.permissions.index')}}">Permission</a></li>
                 </ul>
             </div>
+            @endif
             @endif
             @yield('content')
         </div>

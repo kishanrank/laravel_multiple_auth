@@ -7,7 +7,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Admin Dashboard</div>
-                    <div class="card-body">{{ Auth::user()->name }}You are logged in!</div>
+                    <div class="card-body">{{ Auth::user()->name }} You are logged in! {{ Auth::guard('admin')->user()->name }}</div>
                 </div>
             </div>
         </div>
